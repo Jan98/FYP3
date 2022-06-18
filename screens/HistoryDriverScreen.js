@@ -1,55 +1,62 @@
-import * as React from 'react';
-import { useNavigation } from '@react-navigation/core'
-import { StyleSheet, Button, View, Text, SafeAreaView, Image, TouchableOpacity } from 'react-native';
-
-const HistoryDriverScreen = (navigation) => {
-  
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-      <View style={styles.container}>
-          
-          <Text
-            style={styles.text}>
-            This is an Driver History page. Will do the flatlist!
-          </Text>
-          
-          <View style={styles.buttonContainer}>
-          
-          
-          
-        </View>    
-      </View>
-    </SafeAreaView>
-  );
-};
-
-export default HistoryDriverScreen;
+import React, { useState, useEffect } from 'react'
+import { Text, View, StyleSheet, FlatList } from "react-native"
+import Btn from "../components/Btn"
+import firebase from 'firebase/app';
+import "firebase/auth";
+import "firebase/firestore";
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    //justifyContent: 'center',
-    marginBottom: 16,
-    marginTop: 50,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  button: {
-      alignItems: "center",
-      padding: 12,
-      borderRadius: 12,
-      backgroundColor: "#aae6e6",
-      marginBottom: 16,
-      width: '30%',
-      marginTop: 50,
-      
-  },
-  buttonText: {
-    color: 'black',
-    //fontWeight: 'bold',
-  }
+    view: {
+        width: "100%",
+        height: "100%",
+        padding: 25
+    }
+})
 
-});
+export default function HistoryDriverScreen({ navigation }) {
+
+    const firestore = firebase.firestore;
+    const auth = firebase.auth;
+
+    const [user, setUser] = useState(null) // This user
+    const [booking, setBooking] = useState([]) // Other Users
+
+    useEffect(() => {
+        firestore().collection("booking").doc(auth().currentUser.uid).get()
+            .then(booking => {
+                setUser(booking.data())
+            })
+    }, [])
+
+    useEffect(() => {
+        if (booking)
+            firestore().collection("booking")//.where("uid", "==", (user?.uid === "" ? "" : ""))
+                .onSnapshot(booking => {
+                    if (!booking.empty) {
+                        const BOOKING = []
+
+                        booking.forEach(booking => {
+                            BOOKING.push(booking.data())
+                        })
+
+                        setBooking(BOOKING)
+                    }
+                })
+    }, [booking])
+
+    return (
+    <View>
+        <View style={{ marginTop: 40, marginBottom: 40 }}>
+            <FlatList
+                data={booking}
+                renderItem={({ item }) => <View style={{ borderBottomWidth: 1, borderBottomColor: "#b1b1b1", marginBottom: 20}}>
+                    <Text style={{ fontSize: 18, fontWeight: "400", marginBottom: 8 }}>{item.from} To {item.to}</Text>
+                    <Text style={{ fontSize: 18, fontWeight: "400", marginBottom: 8 }}>{item.date} And {item.time}</Text>
+                </View>}
+                keyExtractor={(item, index) => index.toString()}
+            />
+        </View>
+    </View>
+)
+
+}

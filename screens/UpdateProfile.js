@@ -21,7 +21,6 @@ const [values, setValues] = useState({
   vehicle: "",
   plateno: "",
   validity: "",
-
  
 })
 
@@ -52,23 +51,23 @@ function saveprofile() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{ marginTop: 6}}>Full Name: </Text>
-      <TextBox placeholder="Same as IC" onChangeText={text => handleChange(text, "name")} />
+      <Text style={{ marginTop: 20}}>Full Name: </Text>
+      <TextBox placeholderTextColor="#171a19" placeholder="Same as IC" onChangeText={text => handleChange(text, "name")} />
 
-      <Text style={{ marginTop: 6}}>IC Number: </Text>
-      <TextBox placeholder="Eg: 980224-00-0000" onChangeText={text => handleChange(text, "icno")} />
+      <Text style={{ marginTop: 4}}>IC Number: </Text>
+      <TextBox placeholderTextColor="#171a19" placeholder="Eg: 980224-00-0000" onChangeText={text => handleChange(text, "icno")} />
       
-      <Text style={{ marginTop: 6}}>Bank Account Number: </Text>
-      <TextBox placeholder="Eg: 0000000000000" onChangeText={text => handleChange(text, "bankno")} />
+      <Text style={{ marginTop: 4}}>Bank Account Number: </Text>
+      <TextBox placeholderTextColor="#171a19" placeholder="Eg: 0000000000000" onChangeText={text => handleChange(text, "bankno")} />
       
-      <Text style={{ marginTop: 6}}>Vehicle Type: </Text>
-      <TextBox placeholder="Eg: Proton Saga" onChangeText={text => handleChange(text, "vehicle")} />
+      <Text style={{ marginTop: 4}}>Vehicle Type: </Text>
+      <TextBox placeholderTextColor="#171a19" placeholder="Eg: Proton Saga" onChangeText={text => handleChange(text, "vehicle")} />
       
-      <Text style={{ marginTop: 6}}>Plate Number: </Text>
-      <TextBox placeholder="PGP 1234" onChangeText={text => handleChange(text, "plateno")} />
+      <Text style={{ marginTop: 4}}>Plate Number: </Text>
+      <TextBox placeholderTextColor="#171a19" placeholder="PGP 1234" onChangeText={text => handleChange(text, "plateno")} />
 
-      <Text style={{ marginTop: 6}}>Validity: </Text>
-      <TextBox placeholder="22/09/2020 - 24/02/2023" onChangeText={text => handleChange(text, "validity")} />
+      <Text style={{ marginTop: 4}}>Validity: </Text>
+      <TextBox placeholderTextColor="#171a19" placeholder="22/09/2020 - 24/02/2023" onChangeText={text => handleChange(text, "validity")} />
       
       <View style={{ justifyContent: "center", alignItems: "center", width: "92%", }}>
           <Btn onClick={() => saveprofile()} title="Save" style={{ width: "48%" }} />
@@ -78,11 +77,9 @@ function saveprofile() {
   )
 };
 
-
-
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
+    flex: 1,
     alignItems: "center",
     backgroundColor: "#fff",
     justifyContent: "center",

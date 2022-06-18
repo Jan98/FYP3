@@ -82,16 +82,16 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     position: "absolute",
-    top: 30, //iphone:50
-    left: 20, ////iphone:31
-    paddingTop: 50, //iphone:233
-    paddingBottom: 134,
-    paddingLeft: 31,
+    top: 50, //iphone:50
+    left: 25, ////iphone:31
+    paddingTop: 130, //iphone:233
+    paddingBottom: 50,
+    paddingLeft: 50,
     paddingRight: 31,
     borderRadius: 8,
     backgroundColor: "rgba(255, 255, 255, 1)",
-    width: 320, //iphone:352
-    height: 590, //iphone:812
+    width: 370, //iphone:352
+    height: 700, //iphone:812
   }, 
 
   image: {

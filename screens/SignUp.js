@@ -62,12 +62,12 @@ function SignUp() {
     <ImageBackground style={{flex: 1}} source={require("../assets/backgroundnew.png")} >
         <View style={styles.wrapper}>
         <Text style={{ fontSize: 34, fontWeight: "bold", marginBottom: 10 }}>Sign Up</Text>
-        <TextBox placeholder="Full Name" onChangeText={text => handleChange(text, "name")} />
-        <TextBox placeholder="Email Address" onChangeText={text => handleChange(text, "email")} />
-        <TextBox placeholder="Who are you? (Student or Staff)" onChangeText={text => handleChange(text, "role")}/>
-        <TextBox placeholder="Phone Number" onChangeText={text => handleChange(text, "phone")}/>
-        <TextBox placeholder="Password" secureTextEntry={true}  onChangeText={text => handleChange(text, "pwd")}/>
-        <TextBox placeholder="Confirm Password" secureTextEntry={true}  onChangeText={text => handleChange(text, "pwd2")}/>
+        <TextBox placeholderTextColor="#171a19" placeholder="Full Name" onChangeText={text => handleChange(text, "name")} />
+        <TextBox placeholderTextColor="#171a19" placeholder="Email Address" onChangeText={text => handleChange(text, "email")} />
+        <TextBox placeholderTextColor="#171a19" placeholder="Who are you? (Student or Staff)" onChangeText={text => handleChange(text, "role")}/>
+        <TextBox placeholderTextColor="#171a19" placeholder="Phone Number" onChangeText={text => handleChange(text, "phone")}/>
+        <TextBox placeholderTextColor="#171a19" placeholder="Password" secureTextEntry={true}  onChangeText={text => handleChange(text, "pwd")}/>
+        <TextBox placeholderTextColor="#171a19" placeholder="Confirm Password" secureTextEntry={true}  onChangeText={text => handleChange(text, "pwd2")}/>
     <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", width: "92%", }}>
       <Btn onClick={() => SignUp()} title="Sign Up" style={{ width: "48%" }} />
       <Btn onClick={() => navigation.replace("Login")} title="Login" style={{ width: "48%", backgroundColor: "#344869" }} />
@@ -108,16 +108,16 @@ wrapper: {
   justifyContent: "flex-start",
   alignItems: "center",
   position: "absolute",
-  top: 30, //iphone:50
-  left: 20, ////iphone:31
-  paddingTop: 50, //iphone:233
-  paddingBottom: 134,
-  paddingLeft: 31,
+  top: 50, //iphone:50
+  left: 25, ////iphone:31
+  paddingTop: 130, //iphone:233
+  paddingBottom: 50,
+  paddingLeft: 50,
   paddingRight: 31,
   borderRadius: 8,
   backgroundColor: "rgba(255, 255, 255, 1)",
-  width: 320, //iphone:352
-  height: 590, //iphone:812
+  width: 370, //iphone:352
+  height: 700, //iphone:812
 }, 
 
 image: {

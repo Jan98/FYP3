@@ -15,7 +15,8 @@ import MonthlyIncome from './MonthlyIncome';
 import HomeScreen from './HomeScreen';
 import UpdateProfile from './UpdateProfile';
 import RulesForDriver from './RulesForDriver';
-import DriverRequestScreen from './DriverRequestScreen'
+import DriverRequestScreen from './DriverRequestScreen';
+import RequestDetails from './RequestDetails';
 
 // Import Custom Sidebar
 import CustomSidebarMenu from '../CustomSidebarMenu';
@@ -91,6 +92,23 @@ const SecondScreenStack = ({ navigation }) => {
           },
         }}
       />
+      <Stack.Screen
+        name="RequestDetails"
+        component={RequestDetails}
+        options={{
+          title: 'Request Details', //Set Header Title
+          headerLeft: () => (
+           <NavigationDrawerStructure navigationProps={navigation} />
+          ),
+          headerStyle: {
+           backgroundColor: '#ACEAE9', //Set Header color
+          },
+          headerTintColor: '#000000', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold', //Set Header text style
+          },
+        }}
+      />
       
     </Stack.Navigator>
   );
@@ -127,10 +145,10 @@ const FourthScreenStack = ({ navigation }) => {
   return (
     <Stack.Navigator initialRouteName="MonthlyIncome">
       <Stack.Screen
-        name="Monthly Incomes"
+        name="Incomes"
         component={MonthlyIncome}
         options={{
-          title: 'Monthly Income', //Set Header Title
+          title: 'Income', //Set Header Title
           headerLeft: () => (
             <NavigationDrawerStructure navigationProps={navigation} />
            ),
@@ -193,7 +211,7 @@ const DrawerNavigatorDriver = () => {
         component={ThirdScreenStack}
       />
       <Drawer.Screen
-        name="Monthly Income"
+        name="Income"
         options={{ drawerIcon: () => (<Ionicons name="card" size={30}></Ionicons>) }}
         component={FourthScreenStack}
       />

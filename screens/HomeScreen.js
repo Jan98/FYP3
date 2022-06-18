@@ -4,16 +4,45 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Btn from "../components/Btn"
 import firebase from 'firebase/app';
 import "firebase/auth";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = ({navigation}) => {
- 
-  const auth = firebase.auth;
-  
-  const [user, setUser] = useState(null)
 
+  const firestore = firebase.firestore;
+  const auth = firebase.auth;
+
+  const [user, setUser] = useState(null) // This user
+  const [users, setUsers] = useState([]) // Other Users
+
+  useEffect(() => {
+      firestore().collection("users").doc(auth().currentUser.uid).get()
+          .then(user => {
+              setUser(user.data())
+          })
+  }, [])
+
+  useEffect(() => {
+      if (user)
+          firestore().collection("users")//where("role", "==", (user?.role === "Student" ? "Staff" : "Student"))
+              .onSnapshot(users => {
+                  if (!users.empty) {
+                      const USERS = []
+
+                      users.forEach(user => {
+                          USERS.push(user.data())
+                      })
+
+                      setUsers(USERS)
+                  }
+              })
+  }, [user])
+ 
   return (
     <View style={styles.container}>
-      <View style={styles.welcomecontainer}>
+      <View style={{ alignItems: "center", padding: 20, paddingTop: 55, paddingBottom: 55 }}>
+        <Text style={{ fontSize: 30, fontWeight: "bold" }}>Welcome {user?.name}</Text>
+      </View>
+      <View>
         <Text style={styles.storeName}>Choose</Text>
       </View>
       <TouchableOpacity
@@ -49,16 +78,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: "white",
   },
-  welcomecontainer: {
-    //background: '#ffccff',
-  },
    button: {
     backgroundColor: "#aae6e6",
     width: '60%',
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
-    marginTop: 40,
+    marginTop: 20,
+    marginBottom: 20,
   },
   buttonText: {
     color: 'black',
@@ -69,9 +96,6 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
     fontSize: 25,
+    marginBottom: 20,
   },
-  welcome: {
-    alignItems: 'center',
-    fontSize: 20,
-  }
 })

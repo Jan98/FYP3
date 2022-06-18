@@ -1,12 +1,14 @@
 import 'react-native-gesture-handler';
 import { auth } from '../firebase'
+
+
 import * as React from 'react';
 import { View, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Login from './Login';
+import Payment from './Payment';
 import ProfileUserScreen from './ProfileUserScreen';
 import HistoryUserScreen from './HistoryUserScreen';
 import MapScreen from './MapScreen';
@@ -18,6 +20,9 @@ import "firebase/auth";
 import HomeScreen from './HomeScreen';
 import ListofDriver from './ListofDriver';
 import PriceCopy from './PriceCopy';
+import DriverDetails from './DriverDetails';
+import Feedback from './Feedback';
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -48,6 +53,51 @@ const SecondScreenStack = ({ navigation }) => {
         component={ListofDriver}
         options={{
           title: 'List of Driver', //Set Header Title
+         
+           headerStyle: {
+            backgroundColor: '#ACEAE9', //Set Header color
+           },
+           headerTintColor: '#000000', //Set Header text color
+           headerTitleStyle: {
+             fontWeight: 'bold', //Set Header text style
+           },
+        }}
+      />
+       <Stack.Screen
+        name="DriverDetails"
+        component={DriverDetails}
+        options={{
+          title: 'Driver Details', //Set Header Title
+         
+           headerStyle: {
+            backgroundColor: '#ACEAE9', //Set Header color
+           },
+           headerTintColor: '#000000', //Set Header text color
+           headerTitleStyle: {
+             fontWeight: 'bold', //Set Header text style
+           },
+        }}
+      />
+      <Stack.Screen
+        name="Payment"
+        component={Payment}
+        options={{
+          title: 'Payment', //Set Header Title
+         
+           headerStyle: {
+            backgroundColor: '#ACEAE9', //Set Header color
+           },
+           headerTintColor: '#000000', //Set Header text color
+           headerTitleStyle: {
+             fontWeight: 'bold', //Set Header text style
+           },
+        }}
+      />
+      <Stack.Screen
+        name="Feedback"
+        component={Feedback}
+        options={{
+          title: 'Feedback', //Set Header Title
          
            headerStyle: {
             backgroundColor: '#ACEAE9', //Set Header color

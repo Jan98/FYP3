@@ -1,76 +1,98 @@
-//import * as React from 'react';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/core'
-import { FlatList, StyleSheet, Button, View, Text, SafeAreaView, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Button, View, Text, SafeAreaView, Image, TouchableOpacity } from 'react-native';
 import Btn from "../components/Btn"
 import firebase from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
 
-const styles = StyleSheet.create({
-  view: {
-      width: "100%",
-      height: "100%",
-      padding: 25
-  }
-})
 
-export default function ProfileDriverScreen({ navigation }) {
+
+export default function ProfileDriverScreen ({navigation}) {  
 
   const firestore = firebase.firestore;
   const auth = firebase.auth;
 
   const [user, setUser] = useState(null) // This user
-  const [drivers, setDrivers] = useState([]) // Other Users
+  const [drivers, setDrivers ] = useState([]) // Other Users
 
   useEffect(() => {
-    firestore().collection("drivers").doc(auth().currentUser.uid).get()
-        .then(user => {
-            setUser(user.data())
-        })
-}, [])
+      firestore().collection("drivers").doc(auth().currentUser.uid).get()
+          .then(user => {
+              setUser(user.data())
+          })
+  }, [])
+
   useEffect(() => {
       if (user)
           firestore().collection("drivers").where("role", "==", (user?.role === "Student" ? "Staff" : "Student"))
-              .onSnapshot(drivers => {
+              .onSnapshot(drivers  => {
                   if (!drivers.empty) {
                       const DRIVERS = []
 
-                      DRIVERS.forEach(user => {
-                          DRIVERS.push(user.data())
+                      drivers .forEach(user => {
+                        DRIVERS.push(user.data())
                       })
 
-                      setDrivers(DRIVERS)
+                      setDrivers (DRIVERS)
                   }
               })
   }, [user])
 
-  return <View>
-  <View style={{ padding: 10, backgroundColor: "#b1b1b1", paddingTop: 55 }}>
-      <Text style={{ fontSize: 24, fontWeight: "800" }}>Welcome {user?.name}</Text>
-  </View>
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+          
+          <Text
+            style={styles.text}>
+            Full Name: {user?.name}{'\n'}{'\n'}
+            IC Number: {user?.icno}{'\n'}{'\n'}
+            Bank Account Number: {user?.bankno}{'\n'}{'\n'}
+            Vehicle Type: {user?.vehicle}{'\n'}{'\n'}
+            Plate Number:  {user?.plateno}{'\n'}{'\n'}
+            Validity: {user?.validity}{'\n'}{'\n'}
 
-  <View style={styles.view}>
-      <Text style={{
-          fontSize: 20,
-          fontWeight: "600",
-          marginBottom: 20
-      }}
-      >
-          My Profile:{'\n'}
-          Full Name: {user?.name}{'\n'}
-          IC Number: {user?.icno}{'\n'}
-          Bank Account Number: {user?.bankno}{'\n'}
-          Vehicle Type: {user?.vehicle}{'\n'}
-          Plate Number: {user?.plateno}{'\n'}
-          Validity: {user?.validity}{'\n'}
-      </Text>
-     
-      <Btn title="Update Profile" style={{ alignSelf: "center" }} onClick={() => {
+          </Text>
+ 
+        <TouchableOpacity
+            onPress={() => {
               navigation.navigate('UpdateProfile', { 
               });
-            }} />
-  </View>
+            }}
+            style={styles.update}
+          >
+          <Text style={styles.buttonText}>Update Profile</Text>
+          
+          </TouchableOpacity>
 
-</View>
-      }
+      </View>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    marginBottom: 16,
+    marginTop: 50,
+  },
+  
+  text: {
+    fontSize: 18,
+    marginBottom: 16,
+  },
+  update: {
+    alignItems: "center",
+    padding: 12,
+    borderRadius: 12,
+    backgroundColor: "#aae6e6",
+    marginBottom: 16,
+    width: '50%',
+  },
+  buttonText: {
+    color: 'black',
+    //fontWeight: 'bold',
+  }
+
+});

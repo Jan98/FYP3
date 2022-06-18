@@ -50,12 +50,13 @@ export default function HistoryUserScreen({ navigation }) {
             <FlatList
                 data={booking}
                 renderItem={({ item }) => <View style={{ borderBottomWidth: 1, borderBottomColor: "#b1b1b1", marginBottom: 20}}>
-                    <Text style={{ fontSize: 18, fontWeight: "400", marginBottom: 8 }}>{item.from} To {item.where}</Text>
+                    <Text style={{ fontSize: 18, fontWeight: "400", marginBottom: 8 }}>{item.from} To {item.to}</Text>
+                    <Text style={{ fontSize: 18, fontWeight: "400", marginBottom: 8 }}>{item.date} And {item.time}</Text>
                 </View>}
                 keyExtractor={(item, index) => index.toString()}
             />
         </View>
     </View>
 )
- 
+
 }
